@@ -10,7 +10,7 @@ import {specs} from "./utils/swaggerOptions.js";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5556;
 const app = express();
 
 app.use(express.json());
