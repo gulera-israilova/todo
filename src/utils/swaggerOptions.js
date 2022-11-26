@@ -1,5 +1,5 @@
 import swaggerJsDoc from 'swagger-jsdoc'
-import PORT from "../index.js";
+import PORT from "../../index.js";
 export const options = {
     definition: {
         openapi: "3.0.0",

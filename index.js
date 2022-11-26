@@ -1,12 +1,12 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
-import authRoute from './routes/authRoute.js';
-import todoRoute from './routes/todoRoute.js';
+import authRoute from './src/routes/authRoute.js';
+import todoRoute from './src/routes/todoRoute.js';
 import cors from 'cors';
-import fileUploadRoute from "./routes/fileUploadRoute.js";
+import fileUploadRoute from "./src/routes/fileUploadRoute.js";
 import swaggerUI from "swagger-ui-express";
-import {specs} from "./utils/swaggerOptions.js";
+import {specs} from "./src/utils/swaggerOptions.js";
 
 dotenv.config();
 
