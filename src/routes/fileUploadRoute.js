@@ -1,7 +1,8 @@
 import Router from 'express';
-import { upload } from '../utils/fileService.js';
 import fileUploadController from '../controllers/fileUploadController.js';
 import { validateToken } from "../middlewares/authMiddleware.js";
+import multer from "multer";
+import {upload} from "../utils/fileService.js";
 
 const fileUploadRoute = new Router();
 
@@ -33,12 +34,10 @@ const fileUploadRoute = new Router();
  *                   format: binary
  *       responses:
  *         200:
- *           $ref: '#/components/responses/NoContent'
- *         401:
- *           $ref: '#/components/responses/UnauthorizedError'
+ *           description: The file was successfully upload
  *         500:
- *           $ref: '#/components/responses/UnexpectedError'
+ *           description: Some server error
  */
-fileUploadRoute.post('/upload', validateToken, upload.single('file'),fileUploadController.fileUpload);
+fileUploadRoute.post('/upload', validateToken, upload.single('file'), fileUploadController.fileUpload);
 
 export default fileUploadRoute;
