@@ -24,9 +24,7 @@ class authController {
                 password: hashPassword,
             });
             await user.save();
-            return res.json({
-                message: 'User successfully registered',
-            });
+            return res.json(user)
         } catch (e) {
             console.log(e);
             res.status(400).json({

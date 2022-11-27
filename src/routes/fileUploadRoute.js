@@ -1,10 +1,8 @@
+import {upload} from '../utils/fileUploadToS3.js';
 import Router from 'express';
-import fileUploadController from '../controllers/fileUploadController.js';
-import { validateToken } from "../middlewares/authMiddleware.js";
-import multer from "multer";
-import {upload} from "../utils/fileService.js";
 
 const fileUploadRoute = new Router();
+const singleUpload = upload.single("file");
 
 /**
  * @swagger
@@ -38,6 +36,24 @@ const fileUploadRoute = new Router();
  *         500:
  *           description: Some server error
  */
-fileUploadRoute.post('/upload', validateToken, upload.single('file'), fileUploadController.fileUpload);
+fileUploadRoute.post("/upload", function (req, res) {
+
+    singleUpload(req, res, function (err) {
+        if (err) {
+            return res.json({
+                success: false,
+                errors: {
+                    title: "File Upload Error",
+                    detail: err.message,
+                    error: err,
+                },
+            });
+        }
+        return res.json({
+            fileURI:`${req.file.location}`
+
+        })
+    });
+});
 
 export default fileUploadRoute;

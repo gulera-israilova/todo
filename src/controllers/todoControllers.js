@@ -7,11 +7,9 @@ class todoController {
             const todo = new Todo({
                 title,
                 description,
-            })
-            await todo.save();
-            return res.json({
-                message: 'Todo successfully saved',
             });
+            await todo.save();
+            return res.json(todo)
         } catch (e){
             console.log(e);
             res.status(400).json({
@@ -67,13 +65,17 @@ class todoController {
                 });
             }
 
-            await Todo.findOneAndUpdate(todo, {
-                title,
-                description,
-            });
-            return res.json({
-                message: 'Todo successfully updated',
-            });
+           const updatedTodo = await Todo.findOneAndUpdate(
+                todo,
+                {
+                    title,
+                    description,
+                },
+                {
+                    new: true
+                }
+                );
+            return res.json(updatedTodo);
         } catch (e) {
             console.log(e);
             res.status(400).json({
