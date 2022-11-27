@@ -17,8 +17,6 @@ const singleUpload = upload.single("file");
  *   /file/upload:
  *     post:
  *       summary: Upload file
- *       security:
- *       - bearerAuth: []
  *       tags: [File upload]
  *       requestBody:
  *         required: true
