@@ -4,9 +4,11 @@ class todoController {
     async create (req, res) {
         try {
             const { title, description } = req.body;
+            const userId = req.userId;
             const todo = new Todo({
                 title,
                 description,
+                userId
             });
             await todo.save();
             return res.json(todo)
@@ -20,7 +22,9 @@ class todoController {
 
     async getAll (req, res) {
         try {
-            const todoList = await Todo.find();
+            const todoList = await Todo.find({
+                userId: req.userId
+            });
             return res.json(todoList);
         } catch (e){
             console.log(e);
@@ -35,10 +39,11 @@ class todoController {
             const todoId = req.params.id;
             const todo = await Todo.findOne({
                 _id:todoId,
+                userId: req.userId
             });
             if(!todo) {
                 return res.status(400).json({
-                    message:"There are no todo with this id",
+                    message:"There are no todo with this id in your todo",
                 });
             }
             return res.json(todo);
@@ -57,11 +62,12 @@ class todoController {
             const { title, description } = req.body;
             const todo = await Todo.findOne({
                 _id:todoId,
+                userId: req.userId
             })
 
             if(!todo) {
                 return res.status(400).json({
-                    message: 'There are no todo with this id',
+                    message: 'There are no todo with this id in your todo',
                 });
             }
 
@@ -89,11 +95,12 @@ class todoController {
             const todoId = req.params.id;
             const todo = await Todo.findOne({
                 _id:todoId,
+                userId: req.userId,
             })
 
             if(!todo) {
                 return res.status(400).json({
-                    message: 'There are no todo with this id',
+                    message: 'There are no todo with this id in your todo',
                 })
             }
             await Todo.findOneAndDelete(todo);

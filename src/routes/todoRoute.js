@@ -13,6 +13,7 @@ const todoRoute = new Router()
  *       type: object
  *       required:
  *         - title
+ *         - userId
  *       properties:
  *         _id:
  *           type: string
@@ -23,6 +24,9 @@ const todoRoute = new Router()
  *         description:
  *           type: string
  *           description: The todo description
+ *         userId:
+ *           type: string
+ *           description: Id of the user who created the todo
  *       example:
  *         title: title
  *         description: description
@@ -66,7 +70,7 @@ todoRoute.post( '/', todoValidation, handleValidationErrors, validateToken, todo
  * @swagger
  * /todo:
  *   get:
- *     summary: Returns the list of all the todos
+ *     summary: Returns the list of your todo
  *     security:
  *     - bearerAuth: []
  *     tags: [Todo]
@@ -86,7 +90,7 @@ todoRoute.get('/', validateToken, todoController.getAll)
  * @swagger
  * /todo/{id}:
  *   get:
- *     summary: Get the todo by id
+ *     summary: Get your todo by id
  *     security:
  *     - bearerAuth: []
  *     tags: [Todo]
@@ -105,7 +109,7 @@ todoRoute.get('/', validateToken, todoController.getAll)
  *             schema:
  *               $ref: '#/components/schemas/Todo'
  *       404:
- *         description: The book was not found
+ *         description: The todo was not found
  */
 todoRoute.get('/:id', validateToken,  todoController.getOne)
 
@@ -113,7 +117,7 @@ todoRoute.get('/:id', validateToken,  todoController.getOne)
  * @swagger
  * /todo/{id}:
  *  patch:
- *    summary: Update the todo by the id
+ *    summary: Update your todo by the id
  *    security:
  *    - bearerAuth: []
  *    tags: [Todo]
@@ -148,7 +152,7 @@ todoRoute.patch('/:id', todoValidation, handleValidationErrors, validateToken, t
  * @swagger
  * /todo/{id}:
  *   delete:
- *     summary: Remove the todo by id
+ *     summary: Remove your todo by id
  *     security:
  *     - bearerAuth: []
  *     tags: [Todo]

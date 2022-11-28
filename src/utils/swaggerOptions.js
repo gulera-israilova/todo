@@ -1,5 +1,4 @@
 import swaggerJsDoc from 'swagger-jsdoc'
-import PORT from "../../index.js";
 export const options = {
     definition: {
         openapi: "3.0.0",
@@ -10,12 +9,11 @@ export const options = {
         },
         servers: [
             {
-                url: `http://localhost:5556`,
-            },
-            {
                 url: `https://todo-application9.herokuapp.com`,
             },
-
+            {
+                url: `http://localhost:5556`,
+            },
         ],
         components: {
             securitySchemes: {

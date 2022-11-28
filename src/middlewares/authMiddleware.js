@@ -9,7 +9,8 @@ export function validateToken(req, res, next) {
         const token = (req.headers.authorization || '').replace(/Bearer\s?/, '');
 
         if (token) {
-            req.user = jwt.verify(token, process.env.JWT_SECRET)
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            req.userId = decoded.id;
             next()
         } else {
             return res.status(403).json({message: "User not authorized"})

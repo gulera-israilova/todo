@@ -1,4 +1,4 @@
-import {Schema, model} from "mongoose";
+import mongoose, {Schema, model} from "mongoose";
 
 const Todo = new Schema({
     title: {
@@ -7,6 +7,11 @@ const Todo = new Schema({
     },
     description: {
         type: String,
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
     },
 });
 
