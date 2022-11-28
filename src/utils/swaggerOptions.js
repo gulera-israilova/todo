@@ -12,6 +12,10 @@ export const options = {
             {
                 url: `http://localhost:5556`,
             },
+            {
+                url: `https://todo-application9.herokuapp.com`,
+            },
+
         ],
         components: {
             securitySchemes: {
