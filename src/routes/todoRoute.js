@@ -76,7 +76,7 @@ todoRoute.post( '/', todoValidation, handleValidationErrors, validateToken, todo
  *     tags: [Todo]
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The list of the todo
  *         content:
  *           application/json:
  *             schema:
@@ -104,7 +104,7 @@ todoRoute.get('/', validateToken, todoController.getAll)
  *     responses:
  *       200:
  *         description: The todo by id
- *         contens:
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Todo'
