@@ -30,7 +30,37 @@ const todoRoute = new Router()
  *       example:
  *         title: title
  *         description: description
+ *
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     TodoResponse:
+ *       type: object
+ *       required:
+ *         - title
+ *         - userId
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The auto-generated id of the todo
+ *         title:
+ *           type: string
+ *           description: The todo title
+ *         description:
+ *           type: string
+ *           description: The todo description
+ *         userId:
+ *           type: string
+ *           description: Id of the user who created the todo
+ *       example:
+ *         _id: 63845aebb12a3125ef18d3c2
+ *         title: title
+ *         description: description
  *         userId: 637fe2453defe5b1823db46c
+ *
  *
  */
 
@@ -61,7 +91,7 @@ const todoRoute = new Router()
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Todo'
+ *               $ref: '#/components/schemas/TodoResponse'
  *       500:
  *         description: Some server error
  */
@@ -83,7 +113,7 @@ todoRoute.post( '/', todoValidation, handleValidationErrors, validateToken, todo
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Todo'
+ *                 $ref: '#/components/schemas/TodoResponse'
  */
 todoRoute.get('/', validateToken, todoController.getAll)
 
@@ -108,7 +138,7 @@ todoRoute.get('/', validateToken, todoController.getAll)
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Todo'
+ *               $ref: '#/components/schemas/TodoResponse'
  *       404:
  *         description: The todo was not found
  */
@@ -141,7 +171,7 @@ todoRoute.get('/:id', validateToken,  todoController.getOne)
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Todo'
+ *              $ref: '#/components/schemas/TodoResponse'
  *      404:
  *        description: The todo was not found
  *      500:
@@ -164,7 +194,6 @@ todoRoute.patch('/:id', todoValidation, handleValidationErrors, validateToken, t
  *           type: string
  *         required: true
  *         description: The todo id
- *
  *     responses:
  *       200:
  *         description: The todo was deleted
