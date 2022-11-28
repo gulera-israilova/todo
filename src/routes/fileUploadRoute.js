@@ -16,7 +16,7 @@ const singleUpload = upload.single("file");
  *
  *   /file/upload:
  *     post:
- *       summary: Upload file
+ *       summary: Upload file to AWS S3 bucket
  *       tags: [File upload]
  *       requestBody:
  *         required: true
