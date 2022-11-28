@@ -1,12 +1,12 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
-import authRoute from './routes/authRoute.js';
-import todoRoute from './routes/todoRoute.js';
+import authRoute from './src/routes/authRoute.js';
+import todoRoute from './src/routes/todoRoute.js';
 import cors from 'cors';
 import swaggerUI from "swagger-ui-express";
-import {specs} from "./utils/swaggerOptions.js";
-import fileUploadRoute from "./routes/fileUploadRoute.js";
+import {specs} from "./src/utils/swaggerOptions.js";
+import fileUploadRoute from "./src/routes/fileUploadRoute.js";
 
 dotenv.config();
 
@@ -15,10 +15,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use('/api', swaggerUI.serve, swaggerUI.setup(specs));
 app.use('/auth',authRoute);
 app.use('/todo',todoRoute);
 app.use('/file',fileUploadRoute);
+app.use('/api', swaggerUI.serve, swaggerUI.setup(specs));
 
 const start = async () => {
     try {
